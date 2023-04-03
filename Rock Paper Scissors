@@ -1,0 +1,66 @@
+import java.util.InputMismatchException;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Rock {
+
+    public static void main(String[] args) {
+        whileLoop();
+    }
+
+    public static void whileLoop() {
+        Scanner scanner = new Scanner(System.in);
+        Random randomNumber = new Random();
+        String computerChoiceString;
+        int userChoiceExtended;
+
+        System.out.println("Welcome to rock, paper, scissors!");
+
+        while(true){
+            try {
+                System.out.println("Press 0 for rock, 1 for paper, and 2 for scissors:");
+                int userChoice = scanner.nextInt();
+
+                if (userChoice > 2 || userChoice < 0) {
+                    System.out.println("Invalid Number");
+                    System.out.println("Press 0 for rock, 1 for paper, and 2 for scissors:");
+                    userChoice = scanner.nextInt();
+
+                }
+                if (userChoice < 3 && userChoice >= 0){
+                    userChoiceExtended = userChoice;
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Character");
+                scanner.next();
+            }
+        }
+
+        int computerChoice = randomNumber.nextInt(3);
+
+        if (computerChoice == 0){
+            computerChoiceString = "rock.";
+        } else if (computerChoice == 1) {
+            computerChoiceString = "paper.";
+        } else{
+            computerChoiceString = "scissors.";
+        }
+
+        if (computerChoice == userChoiceExtended){
+            System.out.println("Tie! Computer chose " + computerChoiceString);
+        }
+        if (computerChoice == 0 && userChoiceExtended == 2){
+            System.out.println("You lose! Computer chose " + computerChoiceString);
+        }
+        if (computerChoice == 1 && userChoiceExtended == 2){
+            System.out.println("You win! Computer chose " + computerChoiceString);
+        }
+        if (computerChoice == 2 && userChoiceExtended == 0){
+            System.out.println("You win! Computer chose " + computerChoiceString);
+        }
+        if (computerChoice == 2 && userChoiceExtended == 1){
+            System.out.println("You lose! Computer chose " + computerChoiceString);
+        }
+    }
+}
